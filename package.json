@@ -1,24 +1,15 @@
 {
-  "name": "import-csv-destiny-students",
-  "version": "1.0.0",
-  "description": "Airtable extension for importing CSV student data with duplicate checking",
-  "main": "src/index.js",
   "scripts": {
-    "start": "block run",
-    "build": "block build",
-    "deploy": "block deploy"
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint frontend"
   },
   "dependencies": {
-    "@airtable/blocks": "^1.19.0"
+    "@airtable/blocks": "1.18.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
-  "devDependencies": {},
-  "keywords": [
-    "airtable",
-    "csv",
-    "import",
-    "students",
-    "education"
-  ],
-  "author": "Custom Extension",
-  "license": "MIT"
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-hooks": "^4.6.2"
+  }
 }
