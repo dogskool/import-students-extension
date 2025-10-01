@@ -45,9 +45,20 @@ The Airtable table should have these fields:
 
 ## Installation
 
+### Option 1: Using the Template (Recommended)
+
 1. Install the Airtable Blocks CLI: `npm install -g @airtable/blocks-cli`
-2. Navigate to this directory: `cd import_csv_destiny_students`
-3. Run the extension: `block run`
+2. Initialize from template: `block init YOUR_BASE_ID --template=https://github.com/dogskool/import-students-extension YOUR_PROJECT_NAME`
+3. Navigate to your project: `cd YOUR_PROJECT_NAME`
+4. Run the extension: `block run`
+
+### Option 2: Manual Installation
+
+1. Install the Airtable Blocks CLI: `npm install -g @airtable/blocks-cli`
+2. Clone or download this repository
+3. Navigate to the directory: `cd import-students-extension`
+4. Install dependencies: `npm install`
+5. Run the extension: `block run`
 
 ## Processing Logic
 

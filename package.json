@@ -5,9 +5,20 @@
   "main": "src/index.js",
   "scripts": {
     "start": "block run",
-    "build": "block build"
+    "build": "block build",
+    "deploy": "block deploy"
   },
   "dependencies": {
     "@airtable/blocks": "^0.0.0"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [
+    "airtable",
+    "csv",
+    "import",
+    "students",
+    "education"
+  ],
+  "author": "Custom Extension",
+  "license": "MIT"
 }
