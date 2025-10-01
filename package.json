@@ -1,0 +1,13 @@
+{
+  "name": "import-csv-destiny-students",
+  "version": "1.0.0",
+  "description": "Airtable extension for importing CSV student data with duplicate checking",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "block run",
+    "build": "block build"
+  },
+  "dependencies": {
+    "@airtable/blocks": "^0.0.0"
+  }
+}
