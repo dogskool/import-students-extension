@@ -3,7 +3,8 @@ import { Box, Button, FieldPicker, FormField, Input, Text, TablePicker, useBase,
 import React, { useState, useCallback } from 'react';
 
 function ImportCsvDestinyStudentsApp() {
-    const base = useBase();
+    try {
+        const base = useBase();
     const [selectedTable, setSelectedTable] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [csvData, setCsvData] = useState([]);
@@ -106,12 +107,14 @@ function ImportCsvDestinyStudentsApp() {
         const duplicates = [];
 
         // Get existing X numbers from Airtable
-        records.forEach(record => {
-            const xNumber = record.getCellValue(xNumberField);
-            if (xNumber) {
-                existingXNumbers.add(xNumber.toString());
-            }
-        });
+        if (records && xNumberField) {
+            records.forEach(record => {
+                const xNumber = record.getCellValue(xNumberField);
+                if (xNumber) {
+                    existingXNumbers.add(xNumber.toString());
+                }
+            });
+        }
 
         // Process CSV data
         csvData.forEach((row, index) => {
@@ -133,16 +136,17 @@ function ImportCsvDestinyStudentsApp() {
                 // Create Full Name
                 const fullName = `${firstName} ${lastName}`.trim();
 
-                const recordData = {
-                    [xNumberField.id]: xNumber,
-                    [emailField?.id]: email,
-                    [contractCodeField?.id]: contractCode,
-                    [fullNameField?.id]: fullName,
-                    [firstNameField?.id]: firstName,
-                    [lastNameField?.id]: lastName,
-                    [customSectionNumberField?.id]: csn,
-                    [duplicatesField?.id]: 'No'
-                };
+                const recordData = {};
+                
+                // Only add fields that are mapped
+                if (xNumberField) recordData[xNumberField.id] = xNumber;
+                if (emailField) recordData[emailField.id] = email;
+                if (contractCodeField) recordData[contractCodeField.id] = contractCode;
+                if (fullNameField) recordData[fullNameField.id] = fullName;
+                if (firstNameField) recordData[firstNameField.id] = firstName;
+                if (lastNameField) recordData[lastNameField.id] = lastName;
+                if (customSectionNumberField) recordData[customSectionNumberField.id] = csn;
+                if (duplicatesField) recordData[duplicatesField.id] = 'No';
 
                 newRecords.push(recordData);
             }
@@ -336,6 +340,22 @@ function ImportCsvDestinyStudentsApp() {
             )}
         </Box>
     );
+    } catch (error) {
+        console.error('Extension error:', error);
+        return (
+            <Box padding={3}>
+                <Text size="large" weight="bold" textColor="red">
+                    Extension Error
+                </Text>
+                <Text marginTop={2}>
+                    An error occurred while loading the extension. Please refresh the page and try again.
+                </Text>
+                <Text marginTop={1} textColor="gray">
+                    Error: {error.message}
+                </Text>
+            </Box>
+        );
+    }
 }
 
 initializeBlock(() => <ImportCsvDestinyStudentsApp />);
